@@ -1,2 +1,2 @@
 # External-SilentAim-Cpp-Example
-ViewPitch Modified Camera For fake SilentAim
+Client Sided Camera Modification Example For fake Fortnite SilentAim Externally
