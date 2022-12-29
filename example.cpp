@@ -52,8 +52,8 @@ if (silentaim && GetAsyncKeyState(VK_RBUTTON))
 	uintptr_t CurrentWeapon = Read<uintptr_t>(LocalPawn + 0x8d8);
 	uintptr_t PlayerCameraManager = Read<uintptr_t>(PlayerController + 0x340);
 	
-	uintptr_t ViewPitchMin = 0x331c; // APlayerCameraManager - ViewPitchMin
-	uintptr_t ViewPitchMax = 0x3320; // APlayerCameraManager - ViewPitchMax
+	uintptr_t ViewPitchMin = 0x331c; // APlayerCameraManager - ViewPitchMin - 0x331c
+	uintptr_t ViewPitchMax = 0x3320; // APlayerCameraManager - ViewPitchMax - 0x3320
 	
         if (TargetPositionToScreen.x != 0 || TargetPositionToScreen.y != 0 || TargetPositionToScreen.z != 0)
 	{
