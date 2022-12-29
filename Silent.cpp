@@ -52,28 +52,30 @@ if (silentaim && GetAsyncKeyState(VK_RBUTTON))
 	uintptr_t CurrentWeapon = Read<uintptr_t>(LocalPawn + 0x8d8);
 	uintptr_t PlayerCameraManager = Read<uintptr_t>(PlayerController + 0x340);
 	
-	uintptr_t ViewPitchMin = 0x331c; // APlayerCameraManager - ViewPitchMin - 0x331c
-	uintptr_t ViewPitchMax = 0x3320; // APlayerCameraManager - ViewPitchMax - 0x3320
+	uintptr_t ViewYawMin = 0x331c; // APlayerCameraManager - ViewYawMin - 0x331c
+	uintptr_t ViewYawMax = 0x3320; // APlayerCameraManager - ViewYawMax - 0x3320
+	uintptr_t AimPitchMin = 0x10c0; // AFortWeaponRanged - AimPitchMin - 0x10c0
+	uintptr_t AimPitchMax = 0x10c4; // AFortWeaponRanged - AimPitchMax - 0x10c4
 	
         if (TargetPositionToScreen.x != 0 || TargetPositionToScreen.y != 0 || TargetPositionToScreen.z != 0)
 	{
 		if (CurrentWeapon && PlayerCameraManager)
 		{
-			Vector3 NewRotation = CalculateNewRotation(Location, TargetPosition);
+		        Vector3 NewRotation = CalculateNewRotation(Location, TargetPosition);
 
-			static float OrginalPitchMin = Read<float>(PlayerCameraManager + ViewPitchMin);
-			static float OrginalPitchMax = Read<float>(PlayerCameraManager + ViewPitchMax);
+			static float OrginalPitchMin = KmDrv->Rpm<float>(PlayerCameraManager + ViewYawMin);
+			static float OrginalPitchMax = KmDrv->Rpm<float>(PlayerCameraManager + ViewYawMax);
           
-			Write<float>(CurrentWeapon + 0x331c, NewRotation.x); // APlayerCameraManager - ViewYawMin - 0x331c
-			Write<float>(CurrentWeapon + 0x10c4, NewRotation.x); // AFortWeaponRanged - AimPitchMin - 0x10c4
+			Write<float>(CurrentWeapon + AimPitchMin, NewRotation.x);
+		        Write<float>(CurrentWeapon + AimPitchMax, NewRotation.x);
 
-			Write<float>(PlayerCameraManager + ViewPitchMin, NewRotation.y);
-			Write<float>(PlayerCameraManager + ViewPitchMax, NewRotation.y);
-
-			std::this_thread::sleep_for(std::chrono::seconds(5));
+			Write<float>(PlayerCameraManager + ViewYawMin, NewRotation.y);
+			Write<float>(PlayerCameraManager + ViewYawMax, NewRotation.y);
 			
-			Write<float>(PlayerCameraManager + ViewPitchMin, OrginalPitchMin);
-			Write<float>(PlayerCameraManager + ViewPitchMax, OrginalPitchMax);
+                        Sleep(5);
+			
+			Write<float>(PlayerCameraManager + ViewYawMin, OrginalPitchMin);
+			Write<float>(PlayerCameraManager + ViewYawMax, OrginalPitchMax);
 		}
 	}
 }
