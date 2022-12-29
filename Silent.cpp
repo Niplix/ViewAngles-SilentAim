@@ -65,7 +65,7 @@ if (silentaim && GetAsyncKeyState(VK_RBUTTON))
 			static float OrginalPitchMax = Read<float>(PlayerCameraManager + ViewPitchMax);
           
 			Write<float>(CurrentWeapon + 0x331c, NewRotation.x); // APlayerCameraManager - ViewYawMin - 0x331c
-			Write<float>(CurrentWeapon + 0x10c4, NewRotation.x); // AFortWeaponRanged - AimPitchMax - 0x10c4
+			Write<float>(CurrentWeapon + 0x10c4, NewRotation.x); // AFortWeaponRanged - AimPitchMin - 0x10c4
 
 			Write<float>(PlayerCameraManager + ViewPitchMin, NewRotation.y);
 			Write<float>(PlayerCameraManager + ViewPitchMax, NewRotation.y);
