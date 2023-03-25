@@ -1,3 +1,3 @@
 # External-SilentAim-Cpp-Example
-Client Sided Camera Modification Example For fake Fortnite SilentAim Externally <br>
-Offsets Labelled with how to Update and Intergrate.
+Client Sided Camera Modified External C++ SilentAim Example <br>
+Offsets Labelled with there Class and Data type with there corresponding Dumps
